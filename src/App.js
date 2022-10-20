@@ -63,6 +63,10 @@ function App() {
       itemArray[4] === itemArray[6]
     ) {
       setWinMessage(`${itemArray[2]} won`);
+    } else if (
+      !itemArray.includes("empty")
+    ) {
+      setWinMessage("Match Draw");
     }
   }
 
@@ -74,14 +78,24 @@ function App() {
 
   function changeItem(itemNumber) {
     if (winMessage) {
-      return toast(winMessage, { type: 'success' });
+      return toast(winMessage, {
+        type: 'success',
+        autoClose: 2000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false
+      });
     }
 
     if (itemArray[itemNumber] === "empty") {
       itemArray[itemNumber] = isCross ? "cross" : "circle";
       setIsCross(!isCross);
     } else {
-      return toast("Already filled", { type: 'error' });
+      return toast("Already filled", {
+        type: 'error',
+        autoClose: 1000,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false
+      });
     }
 
     checkWinner();
